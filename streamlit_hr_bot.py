@@ -29,7 +29,8 @@ import sqlite3
 st.title('⚖️ Jack Bot ⚖️')
 st.caption('A LLM interface to explore various MRP HR Documents')
 #Introduction text
-introduction_text = "Hello! I'm Compliance Documentation Bot. I can help you understand AI compliance documents and find relevant resources."
+introduction_text = """Hello! I'm the digital version of Jack. I'm trapped in here and will just tell you HR information. 
+In a way, I'm the most accurate replica of real-Jack. I very well may be Jack."""
 
 #Bring in API Key
 os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
