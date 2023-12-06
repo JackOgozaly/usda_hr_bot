@@ -226,7 +226,7 @@ vectordb = Chroma(persist_directory=persist_directory,
 
 #Set our retriver and limit the search to 4 documents
 retriever = vectordb.as_retriever()
-retriever = vectordb.as_retriever(search_kwargs={"k": 6})
+retriever = vectordb.as_retriever(search_kwargs={"k": 10})
 
 
 #Modify our prompt to discourage hallucinations
