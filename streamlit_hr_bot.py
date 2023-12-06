@@ -26,7 +26,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import sqlite3
 
 #Streamlit customization items
-st.title('⚖️ Jack Bot ⚖️')
+st.title('🐄 Jack Bot 🐄')
 st.caption('A LLM interface to explore various MRP HR Documents')
 #Introduction text
 introduction_text = """Hello! I'm the digital version of Jack. I'm trapped in here and will just tell you HR information. 
