@@ -36,18 +36,7 @@ introduction_text = """Hello! I can help you find relevant HR documents and answ
 os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
 google_api_key = json.loads(st.secrets['google_api_key'], strict=False)
 
-# HTML and CSS to style buttons horizontally
-horizontal_buttons = """
-    <style>
-        .horizontal-buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
-"""
 
-# Display HTML
-st.markdown(horizontal_buttons, unsafe_allow_html=True)
 #________________________Embedding Setup_____________________________________#
 
 #Files to download
@@ -272,9 +261,13 @@ if st.session_state.count == 0:
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-    st.button("What is Workforce Profile?")
-    st.button("What is Workforce Profile?2")
-    st.button("What is Workforce Profile?3")
+    # Create a layout with three columns
+    col1, col2, col3 = st.columns(3)
+    
+    # Add a button to each column
+    button1 = col1.button("Button 1")
+    button2 = col2.button("Button 2")
+    button3 = col3.button("Button 3")
 
 
 
