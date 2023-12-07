@@ -30,7 +30,8 @@ st.title('USDA HR Document Explorer')
 st.sidebar.image('USDA_logo.png', width=100)
 st.caption('A LLM interface to explore various MRP HR Documents')
 #Introduction text
-introduction_text = """Hello! I can help you find relevant HR documents and answer various HR related questions around Applicant Flow Data, USA Staffing, and NFC Insight data systems. How can I help you?"""
+introduction_text = """Hello! I can help you find relevant HR documents and answer various HR related questions around Applicant Flow Data,
+USA Staffing, and NFC Insight data systems. How can I help you today?"""
 
 #Bring in API Key
 os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
@@ -265,11 +266,13 @@ if st.session_state.count == 0:
     col1, col2, col3 = st.columns(3)
     
     # Add a button to each column
-    button1 = col1.button("Button 1")
-    button2 = col2.button("Button 2")
-    button3 = col3.button("Button 3")
+    button1 = col1.button("What is Workforce Profile?")
+    button2 = col2.button("What are NOA codes?")
+    button3 = col3.button("What are the rules for AFD?")
 
 
+if button1:
+    prompt = "What is Workforce Profile?"
 
 #Update our counter so we don't repeat the introduction
 st.session_state.count += 1
