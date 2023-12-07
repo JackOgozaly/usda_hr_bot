@@ -263,6 +263,9 @@ if st.session_state.count == 0:
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
+    st.button("What is Workforce Profile")
+
+
 
 #Update our counter so we don't repeat the introduction
 st.session_state.count += 1
