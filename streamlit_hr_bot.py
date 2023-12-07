@@ -270,7 +270,7 @@ if st.session_state.count == 0:
     button1 = col1.button("What is Workforce Profile?")
     button2 = col2.button("What are NOA codes?")
     button3 = col3.button("What are the rules for AFD?")
-    if button1:
+if button1:
          st.session_state.messages.append({"role": "user", "content": "What is Workforce Profile?"})
          # Display user message in chat message container
          with st.chat_message("user"):
