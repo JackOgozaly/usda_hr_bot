@@ -262,18 +262,6 @@ if st.session_state.count == 0:
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-    # Create a layout with three columns
-    col1, col2, col3 = st.columns(3)
-    
-    # Add a button to each column
-    button1 = col1.button("What is Workforce Profile?")
-    button2 = col2.button("What are NOA codes?")
-    button3 = col3.button("What are the rules for AFD?")
-
-    if button1:
-         st.chat_input() = "What is Workforce Profile?"
-
-
 
 
 #Update our counter so we don't repeat the introduction
@@ -281,6 +269,18 @@ st.session_state.count += 1
 
 
 if prompt := st.chat_input():
+    if st.session_state.count == 1:
+         # Create a layout with three columns
+         col1, col2, col3 = st.columns(3)
+    
+         # Add a button to each column
+         button1 = col1.button("What is Workforce Profile?")
+         button2 = col2.button("What are NOA codes?")
+         button3 = col3.button("What are the rules for AFD?")
+
+         if button1:
+            prompt = "What is Workforce Profile?"
+         
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     # Display user message in chat message container
