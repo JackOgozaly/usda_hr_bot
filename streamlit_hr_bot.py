@@ -269,8 +269,26 @@ if st.session_state.count == 0:
     # Add a button to each column
     button1 = col1.button("What is Workforce Profile?")
     button2 = col2.button("What are NOA codes?")
-    button3 = col3.button("What are the rules for AFD?")         
+    button3 = col3.button("What are the rules for AFD?")
+    if button1:
+         st.session_state.messages.append({"role": "user", "content": "What is Workforce Profile?"})
+         # Display user message in chat message container
+         with st.chat_message("user"):
+            st.markdown(prompt)
+                 
+         # Display assistant response in chat message container
+         with st.chat_message("assistant"):
          
+         with get_openai_callback() as cb:
+            #Chat GPT response
+            response = llm_response = qa({"question": prompt})
+            st.session_state['total_cost'] += cb.total_cost
+            st.session_state['total_tokens'] += cb.total_tokens
+            counter_placeholder.write(f"Total cost of this conversation: ${st.session_state['total_cost']:.5f}")
+            token_placeholder.write(f"Total Tokens Used in Conversation: {st.session_state['total_tokens']}")              
+         #Take our model's output and clean it up for the user
+         llm_output(response)
+
 
 
 
