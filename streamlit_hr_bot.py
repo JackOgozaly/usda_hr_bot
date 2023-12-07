@@ -263,7 +263,10 @@ if st.session_state.count == 0:
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-    st.button("What is Workforce Profile")
+    st.button("What is Workforce Profile?")
+    st.button("What is Workforce Profile?2")
+    st.button("What is Workforce Profile?3")
+    st.button("What is Workforce Profile?4")
 
 
 
