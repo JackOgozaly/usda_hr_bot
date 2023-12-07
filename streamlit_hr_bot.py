@@ -27,7 +27,7 @@ import sqlite3
 
 #Streamlit customization items
 st.title('🐄 Jack Bot 🐄')
-st.sidebar.image('napoleon_painting.jpg')
+st.sidebar.image('USDA_logo.png')
 st.caption('A LLM interface to explore various MRP HR Documents')
 #Introduction text
 introduction_text = """Hello! I'm the digital version of Jack. I'm trapped in here and will just tell you HR information. 
