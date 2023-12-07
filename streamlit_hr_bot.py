@@ -271,7 +271,7 @@ if st.session_state.count == 0:
     button3 = col3.button("What are the rules for AFD?")
 
     if button1:
-         prompt = "What is Workforce Profile?"
+         st.chat_input() = "What is Workforce Profile?"
 
 
 
