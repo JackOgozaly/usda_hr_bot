@@ -274,7 +274,7 @@ if st.session_state.count == 0:
          st.session_state.messages.append({"role": "user", "content": "What is Workforce Profile?"})
          # Display user message in chat message container
          with st.chat_message("user"):
-            st.markdown(prompt)
+            st.markdown("What is Workforce Profile?")
                  
          # Display assistant response in chat message container
          with st.chat_message("assistant"):
