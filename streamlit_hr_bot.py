@@ -36,9 +36,18 @@ introduction_text = """Hello! I can help you find relevant HR documents and answ
 os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
 google_api_key = json.loads(st.secrets['google_api_key'], strict=False)
 
+# HTML and CSS to style buttons horizontally
+horizontal_buttons = """
+    <style>
+        .horizontal-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+"""
 
-
-
+# Display HTML
+st.markdown(horizontal_buttons, unsafe_allow_html=True)
 #________________________Embedding Setup_____________________________________#
 
 #Files to download
@@ -266,7 +275,6 @@ if st.session_state.count == 0:
     st.button("What is Workforce Profile?")
     st.button("What is Workforce Profile?2")
     st.button("What is Workforce Profile?3")
-    st.button("What is Workforce Profile?4")
 
 
 
