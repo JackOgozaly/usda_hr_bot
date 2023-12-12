@@ -28,7 +28,7 @@ import sqlite3
 #Streamlit customization items
 st.title('USDA HR Document Explorer')
 st.sidebar.image('USDA_logo.png', width=100)
-st.caption('A LLM interface to explore various MRP HR Documents')
+st.caption('A LLM interface to explore various Publicly Available HR Documents')
 #Introduction text
 introduction_text = """Hello! I can help you find relevant HR documents and answer various HR related questions around Applicant Flow Data,
 USA Staffing, and NFC Insight data systems. How can I help you today?"""
