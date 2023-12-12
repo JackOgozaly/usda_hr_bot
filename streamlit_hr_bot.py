@@ -37,6 +37,11 @@ USA Staffing, and NFC Insight data systems. How can I help you today?"""
 os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
 google_api_key = json.loads(st.secrets['google_api_key'], strict=False)
 
+#Example prompts
+button_1_text = 'What is Workforce Profile?'
+button_2_text = 'What are NOA codes?'
+button_3_text = 'What are the rules for AFD?'
+
 
 #________________________Embedding Setup_____________________________________#
 
@@ -151,6 +156,35 @@ def llm_output(llm_response):
     #Print our output into the chat
     fake_typing(llm_response['answer'] + '\n\nSources:\n\n' + "\n\n".join(relevant_links))
 
+def click_button(button_type):
+    '''
+    Function for making our buttons stateful
+    ''' 
+    if button_type == 'Button 1':
+        st.session_state.clicked1 = True
+    elif button_type == 'Button 2':
+        st.session_state.clicked2 = True
+    else:
+        st.session_state.clicked3 = True
+
+def chatbot(question):
+    st.session_state.messages.append({"role": "user", "content": question})
+    # Display user message in chat message container
+    with st.chat_message("user"):
+       st.markdown(question)
+            
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+    
+       with get_openai_callback() as cb:
+             #Chat GPT response
+             response = qa({"question": question})
+             st.session_state['total_cost'] += cb.total_cost
+             st.session_state['total_tokens'] += cb.total_tokens
+             counter_placeholder.write(f"Total cost of this conversation: ${st.session_state['total_cost']:.5f}")
+             token_placeholder.write(f"Total Tokens Used in Conversation: {st.session_state['total_tokens']}")              
+       #Take our model's output and clean it up for the user
+       llm_output(response)
 
 #____________________Streamlit Setup____________________________#
 
@@ -169,6 +203,16 @@ if 'total_cost' not in st.session_state:
 #Initialize total tokens
 if 'total_tokens' not in st.session_state:
     st.session_state['total_tokens'] = 0
+
+#Defining our stateful buttons
+if 'clicked1' not in st.session_state:
+    st.session_state.clicked1 = False
+
+if 'clicked2' not in st.session_state:
+    st.session_state.clicked2 = False
+    
+if 'clicked3' not in st.session_state:
+    st.session_state.clicked3 = False
 
 
 # Sidebar - let user choose model, see cost, and clear history
@@ -265,36 +309,26 @@ if st.session_state.count == 0:
 
     # Create a layout with three columns
     col1, col2, col3 = st.columns(3)
-         
-    # Add a button to each column
-    button1 = col1.button("What is Workforce Profile?")
-    button2 = col2.button("What are NOA codes?")
-    button3 = col3.button("What are the rules for AFD?")
-if button1:
-         st.session_state.messages.append({"role": "user", "content": "What is Workforce Profile?"})
-         # Display user message in chat message container
-         with st.chat_message("user"):
-            st.markdown("What is Workforce Profile?")
-                 
-         # Display assistant response in chat message container
-         with st.chat_message("assistant"):
-         
-            with get_openai_callback() as cb:
-                  #Chat GPT response
-                  response = llm_response = qa({"question": prompt})
-                  st.session_state['total_cost'] += cb.total_cost
-                  st.session_state['total_tokens'] += cb.total_tokens
-                  counter_placeholder.write(f"Total cost of this conversation: ${st.session_state['total_cost']:.5f}")
-                  token_placeholder.write(f"Total Tokens Used in Conversation: {st.session_state['total_tokens']}")              
-            #Take our model's output and clean it up for the user
-            llm_output(response)
-
-
+    
+    
+    col1.button(button_1_text, on_click=click_button, args=['Button 1'])
+    
+    col2.button(button_2_text, on_click=click_button, args=['Button 2'])
+    
+    col3.button(button_3_text, on_click=click_button, args=['The really funny thing is this doesnt have to be button 3 but Ill make it that anyways'])
 
 
 #Update our counter so we don't repeat the introduction
 st.session_state.count += 1
 
+if st.session_state.clicked1:
+    chatbot(button_1_text)
+
+if st.session_state.clicked2:
+    chatbot(button_2_text)
+
+if st.session_state.clicked3:
+    chatbot(button_3_text)
 
 if prompt := st.chat_input():         
     # Add user message to chat history
